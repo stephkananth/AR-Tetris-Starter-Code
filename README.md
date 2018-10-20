@@ -73,11 +73,25 @@ Build and run the project. You should now be able to detect and visualize the de
 
 Now lets create a block. Because we are stellar software engineers, we know that because we aim for low coupling and single classes to have a single responsibility, let's make a new class and call it Block.swift. This class will represent a block.
 
-The class should have an initializer which takes an x, y and z parameters as Floats and a color parameter as a string. In the initializer these values should be set to private instance variables in the initializer. The class should also have a draw and a destory method, we will get to those later. 
+The class should have an initializer which takes an x, y and z parameters as Floats and a color parameter as a string. In the initializer these values should be set to private instance variables. The class should also have a draw method.
+
+To draw the block, we create an SCNNode and an SCNBox. We then set the SCNBox to the SCNNode.geometry. We then need to tell the box where to be in space, so we set the node.position property. Lastly we add the node to our scene so that it actually gets drawn.
+
+```swift
+    func draw(scene: SCNScene){
+        var node = SCNNode()
+        var box = SCNBox(width: CGFloat(0.5), height: CGFloat(0.5), length: CGFloat(0.5), chamferRadius: 0)
+        node.geometry = box
+        node.position = SCNVector3(self.x, self.y, self.z)
+        scene.rootNode.addChildNode(node)
+    }
+```
+
+Now let's create blocks on our grid whenever we tap a location on the grid. 
 
 ## Part 2: Implementing AR Tetris ##
 
-Download the starter code from here.
+Download the starter code [here](https://github.com/kicohen/AR-Tetris-Starter-Code).
 
 ### Understanding the Starter Code and API
 
