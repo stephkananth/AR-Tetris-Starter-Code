@@ -28,10 +28,9 @@ class BaseBoard {
         let length = CGFloat(Constants.BLOCK_SIZE * 2)
         let basePosition = SCNVector3(x: x, y: y - Float(height)/2, z: z)
         
-        let box = SCNBox(width: width, height: height, length: length, chamferRadius: 0)
-        node.geometry = box
-        box.firstMaterial?.diffuse.contents = UIImage(named: "gray-wide")
-        node.position = basePosition
-        scene.rootNode.addChildNode(node)
+        // Create a SCNBox
+        // Set the box material
+        // Add the box to a node
+        // Add the node to the scene
     }
 }

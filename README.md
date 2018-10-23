@@ -152,12 +152,11 @@ A very important thing to be aware of here is that the piece is drawn down where
 
 ### Starting the Project
 
-We want to start by creating our own class that is going to implement the GameListener protocol. Let's call this the `ARTetrisListener`. For now, lets define all of the functions with empty bodies so that the compiler does not complain at us. If you would like to see an example of an implementation of the GameListener, there is a class called `ConsoleListener` that implements it. This will be a useful tool for debugging during the process. 
-
-As we have talked about in class and previous labs, iOS development makes use of the MVC design pattern.
-
+Let's start by checking out the `ARTetrisListener` class. Notice how this class implements the `GameListener` protocol and check out all of the methods that must be implemented for the game to work properly. If you would like to see an example of an implementation of the GameListener, there is a class called `ConsoleListener` that implements it. This will be a useful tool for debugging during the process. 
 
 ### Constructing the Base Board
+
+Now lets build our base board. Below is a drawing I made when first writing my implementation of tetris because it was challenging to get all the sizes correct. You are provided with the math to get the width, height, length and base position. You simply have to draw a box and add it to the given scene. If you are having trouble look back at Part 1. 
 
 ![BaseBoard](https://i.imgur.com/bvxNqID.png)
 
@@ -175,15 +174,15 @@ As we have talked about in class and previous labs, iOS development makes use of
     }
 ```
 
-Be sure to go back to our ARTetrisListener and create an instance of the BaseBoard so that when you initialize the listener it creates a base board.
+Be sure to go back to our `ARTetrisListener` and create an instance of the BaseBoard so that when you initialize the listener it creates a base board.
 
 ### Building the Falling Piece
 
-Create a class called `ARPiece`. This class is going to be the visual representation of the falling piece that we get from our tetris listener. 
+Now let's look at the class called `ARPiece`. This class is going to be the visual representation of the falling piece that we get from our tetris listener. 
 
-The ARPiece should be initialized with a Piece and a Location. Using the piece matrix, create a similar matrix but this one should be a 2D list of Blocks where some items can be `nil` if there is not a block there. Because we don't want anyone else to be able to edit this list of blocks, this should be a private variable.
+The `ARPiece` should be initialized with a `Piece` and a location. Using the piece matrix, create a similar matrix but this one should be a 2D list of `Blocks` where some items can be `nil` if there is not a block there. Because we don't want anyone else to be able to edit this list of blocks, this should be a private variable.
 
-The ARPiece should also have a draw method that takes an SCNScene and then iterates over the 2D list of blocks and calls the draw method on each of its blocks.
+The `ARPiece` should also have a `draw` method that takes an `SCNScene` and then iterates over the 2D list of blocks and calls the `draw` method on each of its blocks.
 
 Inside of our implementation of the GameListener's `onPieceMovedOrCreated` method if our currentARPiece is `nil`, we should create a new ARPiece and then draw it.
 

@@ -59,7 +59,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             planeNode.removeFromParentNode()
             
-            let listener = TetrisListener(sceneView: sceneView, home: SCNVector3(translation.x, translation.y, translation.z))
+            let listener = ARTetrisListener(sceneView: sceneView, home: SCNVector3(translation.x, translation.y, translation.z))
             game.subscribe(listener: listener)
             
             if Constants.DEBUG {
