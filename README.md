@@ -13,7 +13,7 @@ For this project, you will __NOT__ be able to use the simulator on a computer, y
 
 ### Starting the project
 
-Let's start with a new project. Create a new ARKit application in XCode. If you run the application on any device that you have hooked up to your computer, out of the box you get a nice space ship flying out in front of your device.
+Let's start with a new project. Create a new Augmented Reality Application in XCode. If you run the application on any device that you have hooked up to your computer, out of the box you get a nice space ship flying out in front of your device.
 
 ![SpaceShip](https://i.imgur.com/LY54DEX.png)
 
