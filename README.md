@@ -29,7 +29,7 @@ sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
 ```
 
 ### Finding a Plane
-Part of the value of ARKit is that it does world tracking for you and can find objects in your world. In many applications we want to be able to place an object onto a surface. Let's start by having our application find and create horizontal planes for us. Add the following line to `viewWillAppear` to tell the application we want it to look for horizontal planes:
+Part of the value of ARKit is that it does world tracking for you and can find objects in your world. In many applications we want to be able to place an object onto a surface. Let's start by having our application find and create horizontal planes for us when the application detects a surface. Add the following line to `viewWillAppear` to tell the application we want it to look for horizontal planes:
 
 ```swift
 configuration.planeDetection = .horizontal
@@ -39,7 +39,7 @@ Now inside of our ViewController implement the following method that will get ca
 
 ```swift
 func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-    // 1
+    // Get the new node that was detected
     guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
     
     // Create a plane from the plane anchor
@@ -58,6 +58,10 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
     let y = CGFloat(planeAnchor.center.y)
     let z = CGFloat(planeAnchor.center.z)
     planeNode.position = SCNVector3(x,y,z)
+
+    // Remember to delete this line when you copy and paste the code or
+    // else your program will not work properly
+
     
     // Rotates the plane because by default planes are vertical
     planeNode.eulerAngles.x = -.pi / 2
@@ -71,23 +75,60 @@ Build and run the project. You should now be able to detect and visualize the de
 
 ### Creating a Block
 
-Now lets create a block. Because we are stellar software engineers, we know that because we aim for low coupling and single classes to have a single responsibility, let's make a new class and call it Block.swift. This class will represent a block.
+Now lets create a block. Because we are stellar software engineers, we know that because we aim for low coupling and single classes to have a single responsibility, let's make a new class and call it Block. This class will represent a block.
 
-The class should have an initializer which takes an x, y and z parameters as Floats and a color parameter as a string. In the initializer these values should be set to private instance variables. The class should also have a draw method.
+The class should have an initializer which takes an x, y and z parameters as Floats. In the initializer these values should be set to private instance variables. The class should also have a draw method.
 
-To draw the block, we create an SCNNode and an SCNBox. We then set the SCNBox to the SCNNode.geometry. We then need to tell the box where to be in space, so we set the node.position property. Lastly we add the node to our scene so that it actually gets drawn.
+To draw the block, we create an SCNNode and an SCNBox. We then set the SCNBox to the SCNNode.geometry. We then need to tell the box where to be in space, so we set the node.position property. Lastly we add the node to our scene so that it actually gets drawn. Make sure you have the proper packages imported.
 
 ```swift
     func draw(scene: SCNScene){
+        // Create the node
         var node = SCNNode()
-        var box = SCNBox(width: CGFloat(0.5), height: CGFloat(0.5), length: CGFloat(0.5), chamferRadius: 0)
+
+        // Create the box
+        var box = SCNBox(width: CGFloat(0.1), height: CGFloat(0.1), length: CGFloat(0.1), chamferRadius: 0)
+        
+        // Set the box color to red
+        box.firstMaterial?.diffuse.contents = UIColor.red 
+
+        // Make the node the box
         node.geometry = box
+
+        // Set the position of the node
         node.position = SCNVector3(self.x, self.y, self.z)
+
+        // Add the node to the scene
         scene.rootNode.addChildNode(node)
     }
 ```
 
-Now let's create blocks on our grid whenever we tap a location on the grid. 
+Now let's create blocks on our grid whenever we tap a location on the grid. To do this, we first add a tap gesture recognizer that calls a function and gives us the location of the tap.
+First in the `viewDidLoad` method tell the `ViewController` to sense taps:
+
+```swift
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.onTap(withGestureRecognizer:)))
+    sceneView.addGestureRecognizer(tapGestureRecognizer)
+```
+
+Now we need to create the method that we just told the ViewController to call when a user taps the screen. The method needs to have the `@objc` annotation and should take one parameter:
+`withGestureRecognizer recognizer: UIGestureRecognizer`.
+
+
+This method gets a point that the user tapped and checks to see if they tapped a place on a horizontal plane. This involves a ton of complicated three-dimensional math that Apple does for us so all you have to do is:
+
+```swift
+    let tapLocation = recognizer.location(in: sceneView)
+    let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
+    guard let hitTestResult = hitTestResults.first else { return }
+    let translation = hitTestResult.worldTransform.columns.3
+
+    // Create a new block and draw it here
+```
+
+You should now have a working app that does world tracking, plane detection and allows you to draw some blocks that looks something like this:
+
+![Sample AR App](https://i.imgur.com/4jlsy3J.jpg)
 
 ## Part 2: Implementing AR Tetris ##
 
