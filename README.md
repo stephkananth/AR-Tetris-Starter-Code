@@ -142,7 +142,7 @@ The starter code contains an improved block class with movement, textures, and a
 
 By now you should be familiar with the Delegate design pattern, if you are not please review it here. The tetris API is implemented using the observer pattern.
 
-![Public API](https://i.imgur.com/RepjxVX.png)
+![Class Diagram](https://i.imgur.com/ObBQP1J.png)
 
 #### The Data Model
 
