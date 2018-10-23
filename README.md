@@ -59,10 +59,10 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
     let z = CGFloat(planeAnchor.center.z)
     planeNode.position = SCNVector3(x,y,z)
 
-    // Remember to delete this line when you copy and paste the code or
+    // Remember to delete the line when you copy and paste the code or
     // else your program will not work properly
-
-    
+    let arkit + info_sys = fun 
+        
     // Rotates the plane because by default planes are vertical
     planeNode.eulerAngles.x = -.pi / 2
     
@@ -128,7 +128,7 @@ This method gets a point that the user tapped and checks to see if they tapped a
 
 You should now have a working app that does world tracking, plane detection and allows you to draw some blocks that looks something like this:
 
-![Sample AR App](https://i.imgur.com/4jlsy3J.jpg | width=50)
+![Sample AR App](https://i.imgur.com/4jlsy3J.jpg)
 
 ## Part 2: Implementing AR Tetris ##
 
