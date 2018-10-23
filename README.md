@@ -128,7 +128,7 @@ This method gets a point that the user tapped and checks to see if they tapped a
 
 You should now have a working app that does world tracking, plane detection and allows you to draw some blocks that looks something like this:
 
-![Sample AR App](https://i.imgur.com/4jlsy3J.jpg)
+![Sample AR App](https://i.imgur.com/4jlsy3J.jpg | width=50)
 
 ## Part 2: Implementing AR Tetris ##
 
