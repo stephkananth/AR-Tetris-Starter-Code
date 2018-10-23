@@ -136,6 +136,8 @@ Download the starter code [here](https://github.com/kicohen/AR-Tetris-Starter-Co
 
 ### Understanding the Starter Code and API
 
+The starter code contains an improved block class with movement, textures, and ability to be destroyed. The starter code also contains an improved plane tracking algorithm for drawing grids on horizontal surfaces. The starter code also contains scaffolded code for you to fill in throughout this lab.  
+
 #### Observer vs Delegate Design patterns
 
 By now you should be familiar with the Delegate design pattern, if you are not please review it here. The tetris API is implemented using the observer pattern.
