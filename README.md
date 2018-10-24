@@ -61,6 +61,8 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
 
     // Remember to delete the line when you copy and paste the code or
     // else your program will not work properly
+    
+    // What is the purpose of this line then?
     let arkit + info_sys = fun 
         
     // Rotates the plane because by default planes are vertical
@@ -81,13 +83,15 @@ The class should have an initializer which takes an x, y and z parameters as Flo
 
 To draw the block, we create an SCNNode and an SCNBox. We then set the SCNBox to the SCNNode.geometry. We then need to tell the box where to be in space, so we set the node.position property. Lastly we add the node to our scene so that it actually gets drawn. Make sure you have the proper packages imported.
 
+Be sure to also import SceneKit and ARKit in this class file.
+
 ```swift
     func draw(scene: SCNScene){
         // Create the node
-        var node = SCNNode()
+        let node = SCNNode()
 
         // Create the box
-        var box = SCNBox(width: CGFloat(0.1), height: CGFloat(0.1), length: CGFloat(0.1), chamferRadius: 0)
+        let box = SCNBox(width: CGFloat(0.1), height: CGFloat(0.1), length: CGFloat(0.1), chamferRadius: 0)
         
         // Set the box color to red
         box.firstMaterial?.diffuse.contents = UIColor.red 
@@ -111,11 +115,11 @@ First in the `viewDidLoad` method tell the `ViewController` to sense taps:
     sceneView.addGestureRecognizer(tapGestureRecognizer)
 ```
 
-Now we need to create the method that we just told the ViewController to call when a user taps the screen. The method needs to have the `@objc` annotation and should take one parameter:
+Now we need to create the method that we just told the ViewController to call when a user taps the screen. The `onTap` method needs to have the `@objc` annotation and should take one parameter:
 `withGestureRecognizer recognizer: UIGestureRecognizer`.
 
 
-This method gets a point that the user tapped and checks to see if they tapped a place on a horizontal plane. This involves a ton of complicated three-dimensional math that Apple does for us so all you have to do is:
+This method gets a point that the user tapped and checks to see if they tapped a place on a horizontal plane. This involves a ton of complicated three-dimensional math that Apple does for us and computes in the `translation` object as `x`, `y`, and `z`, so all you have to do is:
 
 ```swift
     let tapLocation = recognizer.location(in: sceneView)
@@ -123,7 +127,7 @@ This method gets a point that the user tapped and checks to see if they tapped a
     guard let hitTestResult = hitTestResults.first else { return }
     let translation = hitTestResult.worldTransform.columns.3
 
-    // Create a new block and draw it here
+    // Create a new block and draw it here using translation
 ```
 
 You should now have a working app that does world tracking, plane detection and allows you to draw some blocks that looks something like this:
