@@ -175,7 +175,7 @@ Now lets build our base board. Below is a drawing I made when first writing my i
     }
 ```
 
-Be sure to go back to our `ARTetrisListener` and create an instance of the BaseBoard so that when you initialize the listener it creates a base board.
+Be sure to go back to our `ARTetrisListener` and create and draw an instance of the BaseBoard at the home position passed into the initializer so that when you initialize the listener it creates a base board.
 
 ### Building the Falling Piece
 
