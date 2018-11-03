@@ -37,9 +37,11 @@ class ARTetrisListener: GameListener {
     
     func onScoreChanged(score: Int) {
         // Your code here
+        // Optional
     }
     
     func onLevelChanged(level: Int) {
         // Your code here
+        // Optional
     }
 }

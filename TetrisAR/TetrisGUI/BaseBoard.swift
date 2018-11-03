@@ -30,6 +30,7 @@ class BaseBoard {
         
         // Create a SCNBox
         // Set the box material
+        // Set the node's position
         // Add the box to a node
         // Add the node to the scene
     }
