@@ -61,8 +61,6 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
 
     // Remember to delete the line when you copy and paste the code or
     // else your program will not work properly
-    
-    // What is the purpose of this line then?
     let arkit + info_sys = fun 
         
     // Rotates the plane because by default planes are vertical
