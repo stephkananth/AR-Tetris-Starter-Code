@@ -169,6 +169,7 @@ Now lets build our base board. Below is a drawing I made when first writing my i
         
         // Create a SCNBox
         // Set the box material
+        // Set the node's position
         // Add the box to a node
         // Add the node to the scene
     }
