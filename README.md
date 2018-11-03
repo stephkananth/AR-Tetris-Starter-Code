@@ -249,17 +249,15 @@ func removeRow(row: Int) {
 
 Don't forget to call this method in the appropriate place in our listener.
 
-### Displaying the Score
-
-## Part 3: Additional Features (Optional) ##
+## Part 3: Additional Features (VERY OPTIONAL) ##
 
 ### Game Flow - Welcome Screen, Game Over Screen and Restarting the Game
 
 It would be nice if there was a welcome screen when you opened the app or after you lost, you were given the opportunity to restart the game. See if you can use some of the skills you learned in previous labs to create these additional screens.
 
-### Levels
+### Score and Levels
 
-The TetrisListener has a onLevelChanged method, similar to how we displayed the score, see if you can add another textbox to display the user's current level. 
+The TetrisListener has an `onLevelChanged` and an `onScoreChanged` method see if you can add a couple textboxes to display the user's current level and score. 
 
 ### Soft Drop and Hard Drop
 
