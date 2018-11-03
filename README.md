@@ -184,20 +184,23 @@ The `ARPiece` should be initialized with a `Piece` and a location. Using the pie
 
 The `ARPiece` should also have a `draw` method that takes an `SCNScene` and then iterates over the 2D list of blocks and calls the `draw` method on each of its blocks.
 
-Inside of our implementation of the GameListener's `onPieceMovedOrCreated` method if our currentARPiece is `nil`, we should create a new ARPiece and then draw it.
+Inside of our implementation of the GameListener's `onPieceMovedOrCreated` method if our currentARPiece is `nil`, we should create a new `ARPiece` and then draw it.
 
 ### Moving the Falling Piece Left, Right and Down
 
-Now let's add a `move` method to the ARPiece class that takes a location and moves the piece to that location. This should be similar to the initialization of the piece but instead of initializing a block, we set the location of the block that is already there. 
+Now let's add a `move` method to the `ARPiece` class that takes a location and moves the piece to that location. This should be similar to the initialization of the piece but instead of initializing a block, we set the location of the block that is already there. 
 
 This method should be called inside of our implementation of the GameListener's `onPieceMovedOrCreated` method.
 
 ### Rotating the Falling Piece
 
-Lets add a method to our ARPiece to rotate the piece. This should just iterate over the piece and construct a new 2D list of blocks of our piece. If you forgot the algorithm for rotating a matrix, see the [112 rotating section](http://www.kosbie.net/cmu/spring-16/15-112/notes/notes-tetris/2_5_RotatingTheFallingPiece.html) for help.
-
+Lets add a method to our ARPiece to rotate the piece. This should just iterate over the piece and construct a new 2D list of blocks of our piece. If you forgot the algorithm for rotating a matrix, see the [section on piece rotation from 15-112](http://www.kosbie.net/cmu/spring-16/15-112/notes/notes-tetris/2_5_RotatingTheFallingPiece.html) for help.
 
 Remember to call this method in our listener and then call the move method so that it moves the blocks to their updated locations. 
+
+### Destroying pieces
+
+You will need a way to destroy pieces at some point. 
 
 ### Placing the Falling Piece on our Board
 
