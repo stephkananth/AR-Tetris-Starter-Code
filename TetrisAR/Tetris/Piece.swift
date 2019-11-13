@@ -1,8 +1,8 @@
 internal class Piece {
-    private var row : Int
-    private var col : Int
+    private var row: Int
+    private var col: Int
     private let color: String
-    private let matrix : [[Bool]]
+    private let matrix: [[Bool]]
     
     init(row: Int, col: Int, color: String, matrix: [[Bool]]) {
         self.row = row
@@ -46,43 +46,43 @@ internal class Piece {
     }
 }
 
-internal class OPiece : Piece {
+internal class OPiece: Piece {
     init(row: Int, col: Int, color: String) {
         super.init(row: row, col: col, color: color, matrix: [[true, true], [true, true]])
     }
 }
 
-internal class LPiece : Piece {
+internal class LPiece: Piece {
     init(row: Int, col: Int, color: String) {
         super.init(row: row, col: col, color: color, matrix: [[true, false, false], [true, true, true]])
     }
 }
 
-internal class IPiece : Piece {
+internal class IPiece: Piece {
     init(row: Int, col: Int, color: String) {
         super.init(row: row, col: col, color: color, matrix: [[true,  true,  true,  true]])
     }
 }
 
-internal class JPiece : Piece {
+internal class JPiece: Piece {
     init(row: Int, col: Int, color: String) {
         super.init(row: row, col: col, color: color, matrix: [[false, false, true], [true, true, true]])
     }
 }
 
-internal class SPiece : Piece {
+internal class SPiece: Piece {
     init(row: Int, col: Int, color: String) {
         super.init(row: row, col: col, color: color, matrix: [[true, true, false], [false, true, true]])
     }
 }
 
-internal class ZPiece : Piece {
+internal class ZPiece: Piece {
     init(row: Int, col: Int, color: String) {
         super.init(row: row, col: col, color: color, matrix: [[false, true, true], [true, true, false]])
     }
 }
 
-internal class TPiece : Piece {
+internal class TPiece: Piece {
     init(row: Int, col: Int, color: String) {
         super.init(row: row, col: col, color: color, matrix: [[false, true, false], [true, true, true]])
     }

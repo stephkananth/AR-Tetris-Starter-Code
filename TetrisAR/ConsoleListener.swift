@@ -1,6 +1,6 @@
 import Foundation
 
-class ConsoleListener : GameListener {
+class ConsoleListener: GameListener {
     func onPieceMovedOrCreated(piece: Piece) {
         print("Piece moved or created: ")
         print(piece)
