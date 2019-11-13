@@ -1,11 +1,3 @@
-//
-//  Game.swift
-//  TetrisAR
-//
-//  Created by Kenny Cohen on 6/18/18.
-//  Copyright © 2018 Kenny Cohen. All rights reserved.
-//
-
 import Foundation
 
 class Game {
@@ -228,25 +220,25 @@ class Game {
     
     private func canMovePieceDown() -> Bool {
         let newPiece = Piece(row: piece.getCurrentRow() - 1, col: piece.getCurrentCol(),
-                                 color: piece.getColor(), matrix: piece.getPieceMatrix())
+                             color: piece.getColor(), matrix: piece.getPieceMatrix())
         return isLegalPiece(board: board, newPiece: newPiece)
     }
     
     private func canMovePieceLeft() -> Bool {
         let newPiece = Piece(row: piece.getCurrentRow(), col: piece.getCurrentCol() - 1,
-                                 color: piece.getColor(), matrix: piece.getPieceMatrix())
+                             color: piece.getColor(), matrix: piece.getPieceMatrix())
         return isLegalPiece(board: board, newPiece: newPiece)
     }
     
     private func canMovePieceRight() -> Bool {
         let newPiece = Piece(row: piece.getCurrentRow(), col: piece.getCurrentCol() + 1,
-                                 color: piece.getColor(), matrix: piece.getPieceMatrix())
+                             color: piece.getColor(), matrix: piece.getPieceMatrix())
         return isLegalPiece(board: board, newPiece: newPiece)
     }
     
     private func canRotatePiece() -> Bool {
         let newPiece = Piece(row: piece.getCurrentRow(), col: piece.getCurrentCol(),
-                                 color: piece.getColor(), matrix: piece.rotate())
+                             color: piece.getColor(), matrix: piece.rotate())
         return isLegalPiece(board: board, newPiece: newPiece)
     }
     

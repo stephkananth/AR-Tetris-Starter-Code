@@ -1,11 +1,3 @@
-//
-//  PlacedBlocks.swift
-//  TetrisAR
-//
-//  Created by Kenny Cohen on 6/19/18.
-//  Copyright © 2018 Kenny Cohen. All rights reserved.
-//
-
 import Foundation
 
 class PlacedBlocks {

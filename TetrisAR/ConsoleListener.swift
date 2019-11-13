@@ -1,11 +1,3 @@
-//
-//  ConsoleListener.swift
-//  TetrisAR
-//
-//  Created by Kenny Cohen on 6/20/18.
-//  Copyright © 2018 Kenny Cohen. All rights reserved.
-//
-
 import Foundation
 
 class ConsoleListener : GameListener {

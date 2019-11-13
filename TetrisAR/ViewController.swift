@@ -1,18 +1,10 @@
-//
-//  ViewController.swift
-//  TetrisAR
-//
-//  Created by Kenny Cohen on 6/18/18.
-//  Copyright © 2018 Kenny Cohen. All rights reserved.
-//
-
 import UIKit
 import SceneKit
 import ARKit
 import Foundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
     @IBOutlet var sceneView: ARSCNView!
     var game: Game = Game(rows: Constants.ROWS, cols: Constants.COLS)
     var planeNode = SCNNode()
@@ -123,7 +115,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let grid = plane.materials.first as? GridMaterial {
             grid.updateWith(anchor: anchor as! ARPlaneAnchor)
         }
-
+        
         let width = CGFloat(planeAnchor.extent.x)
         let height = CGFloat(planeAnchor.extent.z)
         plane.width = width
@@ -138,9 +130,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
 
 extension float4x4 {
-    var translation: float3 {
+    var translation: SIMD3<Float> {
         let translation = self.columns.3
-        return float3(translation.x, translation.y, translation.z)
+        return SIMD3<Float>(translation.x, translation.y, translation.z)
     }
 }
 
