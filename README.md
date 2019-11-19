@@ -1,31 +1,30 @@
-# Lab X: Augmented Reality Tetris #
-
+# Lab 11: Augmented Reality Tetris
 In this lab, we will implement an Augmented Reality version of the video game, Tetris. The lab is inspired by David Kosbie's [Tetris Assignment](http://www.kosbie.net/cmu/spring-16/15-112/notes/notes-tetris/TetrisForIntroIntermediateProgrammers.html) from [15-112 Fundamentals of Computer Science](https://www.cs.cmu.edu/~112/) and the Scrabble assignment from [17-214 Principles of Software Construction](http://www.cs.cmu.edu/~charlie/courses/17-214/).
 
-The learning goals for you for this lab are:
-- Demonstrate basic fluency in GUI implementations, including an understanding of event handling and the observer pattern
-- Gain experience in the use of Apple's ARKit software development kit
-- Gain experience programming against existing interfaces and working with other developer's APIs
+The learning goals for you for this lab are to:
+* Demonstrate basic fluency in GUI implementations, including an understanding of event handling and the observer pattern.
+* Gain experience in the use of Apple's ARKit software development kit.
+* Gain experience programming against existing interfaces and working with other developer's APIs.
 
-For this project, you will __NOT__ be able to use the simulator on a computer, you will need a device that can run ARKit.
+For this project, you will  *NOT* be able to use the simulator on a computer; you will need a device that can run ARKit (i.e. and iPhone SE/iPhone 6s or newer).
 
-## Part 1: Intro to AR Kit ##
-
-### Starting the project
-
-Let's start with a new project. Create a new Augmented Reality Application in XCode. If you run the application on any device that you have hooked up to your computer, out of the box you get a nice space ship flying out in front of your device.
+## Part 1: Intro to ARKit
+### Starting the Project
+Let's start with a new project. Create a new Augmented Reality Application in XCode with SceneKit. If you run the application on any device that you have hooked up to your computer, you should see a nice spaceship flying out in front of your device. (If you see a gray cube, you have created your project with RealityKit and should start over using SceneKit.)
 
 ![SpaceShip](https://i.imgur.com/LY54DEX.png)
 
-Now lets take a look at the `ViewController.swift` file. Let's start by replacing the Space Ship scene with a blank scene:
+Now let’s take a look at the `ViewController.swift` file. Let's start by replacing the spaceship scene with a blank scene:
+
 ```swift
 // Create a new scene
 let scene = SCNScene()
 ```
+
 Let's also turn feature points on by adding this line to our ViewDidLoad method: 
 
 ```swift
-sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+sceneView.debugOptions = .showFeaturePoints
 ```
 
 ### Finding a Plane
@@ -74,14 +73,11 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
 Build and run the project. You should now be able to detect and visualize the detected horizontal plane.
 
 ### Creating a Block
-
-Now lets create a block. Because we are stellar software engineers, we know that because we aim for low coupling and single classes to have a single responsibility, let's make a new class and call it Block. This class will represent a block.
+Now let’s create a block. Because we are stellar software engineers, we know that because we aim for low coupling and single classes to have a single responsibility, let's make a new class and call it `Block`. This class will represent a block.
 
 The class should have an initializer which takes an x, y and z parameters as Floats. In the initializer these values should be set to private instance variables. The class should also have a draw method.
 
-To draw the block, we create an SCNNode and an SCNBox. We then set the SCNBox to the SCNNode.geometry. We then need to tell the box where to be in space, so we set the node.position property. Lastly we add the node to our scene so that it actually gets drawn. Make sure you have the proper packages imported.
-
-Be sure to also import SceneKit and ARKit in this class file.
+To draw the block, we create an SCNNode and an SCNBox. We then set the SCNBox to the SCNNode.geometry. We then need to tell the box where to be in space, so we set the node.position property. Lastly we add the node to our scene so that it actually gets drawn. Be sure to import SceneKit and ARKit in this class file.
 
 ```swift
     func draw(scene: SCNScene){
@@ -106,7 +102,8 @@ Be sure to also import SceneKit and ARKit in this class file.
 ```
 
 Now let's create blocks on our grid whenever we tap a location on the grid. To do this, we first add a tap gesture recognizer that calls a function and gives us the location of the tap.
-First in the `viewDidLoad` method tell the `ViewController` to sense taps:
+
+First in the `viewDidLoad` method, tell the `ViewController` to sense taps:
 
 ```swift
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.onTap(withGestureRecognizer:)))
@@ -115,7 +112,6 @@ First in the `viewDidLoad` method tell the `ViewController` to sense taps:
 
 Now we need to create the method that we just told the ViewController to call when a user taps the screen. The `onTap` method needs to have the `@objc` annotation and should take one parameter:
 `withGestureRecognizer recognizer: UIGestureRecognizer`.
-
 
 This method gets a point that the user tapped and checks to see if they tapped a place on a horizontal plane. This involves a ton of complicated three-dimensional math that Apple does for us and computes in the `translation` object as `x`, `y`, and `z`, so all you have to do is:
 
@@ -129,37 +125,28 @@ This method gets a point that the user tapped and checks to see if they tapped a
 ```
 
 You should now have a working app that does world tracking, plane detection and allows you to draw some blocks that looks something like this:
-
 ![Sample AR App](https://i.imgur.com/4jlsy3J.jpg)
 
-## Part 2: Implementing AR Tetris ##
-
-Download the starter code [here](https://github.com/kicohen/AR-Tetris-Starter-Code).
+## Part 2: Implementing AR Tetris
+Download the starter code [here](https://github.com/stephkananth/AR-Tetris-Starter-Code).
 
 ### Understanding the Starter Code and API
-
 The starter code contains an improved block class with movement, textures, and ability to be destroyed. The starter code also contains an improved plane tracking algorithm for drawing grids on horizontal surfaces. The starter code also contains scaffolded code for you to fill in throughout this lab.  
 
-#### Observer vs Delegate Design patterns
-
-By now you should be familiar with the Delegate design pattern, if you are not please review it here. The tetris API is implemented using the observer pattern.
-
+#### Observer vs. Delegate Design Patterns
+By now you should be familiar with the Delegate design pattern. If you are not, please review it here. The Tetris API is implemented using the observer pattern.
 ![Class Diagram](https://i.imgur.com/ObBQP1J.png)
 
 #### The Data Model
-
 ![Pieces](https://i.imgur.com/M3Ap9gq.png)
-
-A very important thing to be aware of here is that the piece is drawn down where it's first row is it's top row whereas the board is drawn up where it's first row is at the bottom.
+A very important thing to be aware of here is that the piece is drawn down (where its first row is its top row) whereas the board is drawn up (where its first row is at the bottom).
 
 ### Starting the Project
-
 Let's start by checking out the `ARTetrisListener` class. Notice how this class implements the `GameListener` protocol and check out all of the methods that must be implemented for the game to work properly. If you would like to see an example of an implementation of the GameListener, there is a class called `ConsoleListener` that implements it. This will be a useful tool for debugging during the process. 
 
 ### Constructing the Base Board
 
-Now lets build our base board. Below is a drawing I made when first writing my implementation of tetris because it was challenging to get all the sizes correct. You are provided with the math to get the width, height, length and base position. You simply have to draw a box and add it to the given scene. If you are having trouble look back at Part 1. 
-
+Now let’s build our base board. Below is a drawing I made when first writing my implementation of Tetris because it was challenging to get all the sizes correct. You are provided with the math to get the width, height, length and base position. You simply have to draw a box and add it to the given scene. If you are having trouble look back at Part 1. 
 ![BaseBoard](https://i.imgur.com/bvxNqID.png)
 
 ```swift
